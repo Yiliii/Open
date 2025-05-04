@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Knife
   icon: {fileID: 21300000, guid: b77041957e9ae7f40823aaf5ef790505, type: 3}
-  description: It's a kitchen knife...sharp
+  description: "A sharp kitchen knife. The blade is clean \u2014 too clean. Not sure
+    if it\u2019s waiting to be used\u2026or if it's already been used, long ago.
+    Holding it feels heavier than it should, as if it carries more than just weight."

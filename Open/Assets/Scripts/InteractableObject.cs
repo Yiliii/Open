@@ -1,43 +1,75 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class InteractableObject : MonoBehaviour
 {
     [TextArea]
     public string interactionText;
 
-    private bool playerInRange = false;
     public GameObject dialogBox;
-    public TMPro.TMP_Text dialogText;
+    public TMP_Text dialogText;
 
     private InventoryUIController inventoryUIController;
+    private bool playerInRange = false;
+    private bool dialogActive = false;
+
+    private List<string> textSegments = new List<string>();
+    private int currentSegmentIndex = 0;
 
     void Start()
     {
         inventoryUIController = FindObjectOfType<InventoryUIController>();
-                
     }
-
 
     void Update()
     {
         if (inventoryUIController != null && inventoryUIController.IsInventoryOpen())
         {
-            dialogBox.SetActive(false);
+            CloseDialog();
+            return;
         }
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
+
+        if (playerInRange)
         {
-            if (dialogBox.activeInHierarchy)
+            if (!dialogActive && Input.GetKeyDown(KeyCode.E))
             {
-                dialogBox.SetActive(false);
+                StartDialog();
             }
-            else
+            else if (dialogActive && Input.GetKeyDown(KeyCode.Space))
             {
-                dialogBox.SetActive(true);
-                dialogText.text = interactionText;
+                NextSegment();
             }
         }
+    }
+
+    void StartDialog()
+    {
+        textSegments = new List<string>(interactionText.Split(new[] { "[next]" }, System.StringSplitOptions.None));
+        currentSegmentIndex = 0;
+        dialogBox.SetActive(true);
+        dialogText.text = textSegments[currentSegmentIndex].Trim();
+        dialogActive = true;
+    }
+
+    void NextSegment()
+    {
+        currentSegmentIndex++;
+        if (currentSegmentIndex < textSegments.Count)
+        {
+            dialogText.text = textSegments[currentSegmentIndex].Trim();
+        }
+        else
+        {
+            CloseDialog();
+        }
+    }
+
+    void CloseDialog()
+    {
+        dialogBox.SetActive(false);
+        dialogActive = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -51,8 +83,7 @@ public class InteractableObject : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            if (dialogBox.activeInHierarchy)
-                dialogBox.SetActive(false);
+            CloseDialog();
         }
     }
 }

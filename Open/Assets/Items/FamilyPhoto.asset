@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: FamilyPhoto
   icon: {fileID: 21300000, guid: ad0d33bae28345745b2962c3df526096, type: 3}
-  description: ...
+  description: "It\u2019s the only thing that still looks whole...I don\u2019t remember
+    when this family photo was taken, but somehow, it remembers me... and Mom..."

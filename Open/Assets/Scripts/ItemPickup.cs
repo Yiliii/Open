@@ -10,6 +10,9 @@ public class ItemPickup : MonoBehaviour
     private bool canInteract = false;
     private SpriteRenderer spriteRenderer;
     private Collider2D pickupCollider;
+    public GameObject dialogBox; // Added for showing pickup message
+    public TMPro.TMP_Text dialogText;
+    public float messageDuration = 1f;
 
     void Start()
     {
@@ -30,7 +33,7 @@ public class ItemPickup : MonoBehaviour
             if (!InventoryManager.Instance.HasItem(uniqueID))
             {
                 InventoryManager.Instance.AddItem(item, uniqueID);
-                gameObject.SetActive(false); // disappear forever
+                ShowPickupMessage($"Collected a {item.itemName}... (Press Z to View)");
             }
         }
     }
@@ -45,5 +48,25 @@ public class ItemPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
             canInteract = false;
+    }
+
+    void ShowPickupMessage(string message)
+    {
+        if (dialogBox != null && dialogText != null)
+        {
+            StartCoroutine(DisplayMessageCoroutine(message));
+        }
+    }
+
+    IEnumerator DisplayMessageCoroutine(string message)
+    {
+        var player = GameObject.FindWithTag("Player")?.GetComponent<PlayerMovement>();
+        dialogBox.SetActive(true);
+        dialogText.text = message;
+
+        yield return new WaitForSeconds(messageDuration);
+        Debug.Log("After 2sec");
+        dialogBox.SetActive(false);
+        gameObject.SetActive(false); // disappear forever
     }
 }

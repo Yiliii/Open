@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class FinalWallyInteractionManager : MonoBehaviour
 {
@@ -10,6 +11,30 @@ public class FinalWallyInteractionManager : MonoBehaviour
     [Header("Emotes")]
     public GameObject emoteWally;   // Emote shown above Wally
     public GameObject emotePlayer;  // Emote shown above Player
+
+    [Header("Dialogue Intro")]
+    public GameObject blackScreen;
+    public GameObject dialogBox;
+    public TMP_Text dialogText;
+
+    private string[] introDialogues = new string[]
+    {
+        "Wally: Minty?",
+        "Wally: Minty?!",
+        "(Wally is back home now!)",
+        "(What do I do now?)",
+        "(I walked to the front door in the kitchen... and Wally is here)",
+        "Wally: Why are you out?",
+        "Wally: Where is Minty?!",
+        "(Wally sees the bloodstain on my sleeve)",
+        "Wally: What did you do to Minty?!",
+        "Wally: I asked you — what did you do to your sister?! You monster!"
+    };
+
+    private int dialogueIndex = 0;
+    private bool isIntroPlaying = true;
+    private float autoAdvanceDelay = 2.5f;
+    private float advanceTimer = 0f;
 
     private bool playerInRange = false;
     private bool hasUsedItem = false;
@@ -24,11 +49,42 @@ public class FinalWallyInteractionManager : MonoBehaviour
         inventoryUI = FindObjectOfType<InventoryUIController>();
 
         HideAllEmotes();
+
+        if (blackScreen != null) blackScreen.SetActive(true);
+        if (dialogBox != null && dialogText != null)
+        {
+            dialogBox.SetActive(true);
+            dialogText.text = introDialogues[dialogueIndex];
+        }
     }
 
     void Update()
     {
-        if (hasUsedItem) return;
+        if (isIntroPlaying)
+        {
+            advanceTimer += Time.deltaTime;
+            if (advanceTimer >= autoAdvanceDelay)
+            {
+                dialogueIndex++;
+                advanceTimer = 0f;
+
+                if (dialogueIndex < introDialogues.Length)
+                {
+                    dialogText.text = introDialogues[dialogueIndex];
+
+                    if (dialogueIndex == 5 && blackScreen != null)
+                        blackScreen.SetActive(false);
+                }
+                else
+                {
+                    isIntroPlaying = false;
+                    if (dialogBox != null) dialogBox.SetActive(false);
+                    timer = 0f;
+                }
+            }
+            return;
+        }
+
         if (inventoryUI != null && inventoryUI.IsInventoryOpen()) 
         {
             HideAllEmotes();
@@ -37,7 +93,6 @@ public class FinalWallyInteractionManager : MonoBehaviour
 
         ShowRelevantEmote();
 
-        // if (playerInRange && !hasUsedItem)
         if (!hasUsedItem)
         {
             timer += Time.deltaTime;
@@ -56,7 +111,6 @@ public class FinalWallyInteractionManager : MonoBehaviour
 
             if (held.itemName == "Knife")
             {
-                hasUsedItem = true;
                 if (playerInRange)
                 {
                     GameStateManager.Instance.wallyDead = true;
@@ -69,7 +123,6 @@ public class FinalWallyInteractionManager : MonoBehaviour
             }
             else if (held.itemName == "FamilyPhoto" && playerInRange)
             {
-                hasUsedItem = true;
                 SceneManager.LoadScene("Prison_Ending");
             }
         }
