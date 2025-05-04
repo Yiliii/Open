@@ -8,4 +8,37 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Kitchen.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Hallway.unity
+    guid: 65e8bc2135c6c0a41863e0cf166f32d3
+  - enabled: 1
+    path: Assets/Scenes/2nd Floor.unity
+    guid: 88463606339fb9d4a9a0786673d93533
+  - enabled: 1
+    path: Assets/Scenes/Basement.unity
+    guid: e1764cd1340618446893a8cc63b12b7a
+  - enabled: 1
+    path: Assets/Scenes/Dad's Room.unity
+    guid: ce115561b43cb5146b16602a5d7b9f6a
+  - enabled: 1
+    path: Assets/Scenes/Ed's Room.unity
+    guid: 4f432445f67ac7f4a95b9f65cefb8dfc
+  - enabled: 1
+    path: Assets/Scenes/Empty Room.unity
+    guid: e9f5f93a69266dd4ca8036dcf0403f88
+  - enabled: 1
+    path: Assets/Scenes/Minty's Room.unity
+    guid: bd60e3bde3f576f489ce28d251921abe
+  - enabled: 1
+    path: Assets/Scenes/Storage.unity
+    guid: 5bb8e1690c7e5424488b25ccfd474b04
+  - enabled: 1
+    path: Assets/Scenes/Wally's Room.unity
+    guid: 1685522c37b0ec047b97f4a634151ab0
+  - enabled: 1
+    path: Assets/Scenes/Escape Ending.unity
+    guid: b9d975655af7c164bb443e8bd956d0a1
+  - enabled: 1
+    path: Assets/Scenes/Escape_after_discovery_Ending.unity
+    guid: f6130bc4879507044bde0c47339a5e57
   m_configObjects: {}
