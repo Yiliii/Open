@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 87f826454523d054891c64735fb8aa6f
+  - enabled: 1
     path: Assets/Scenes/Kitchen.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    guid: a5e6af74f8e7cde40b88d8afba41bc19
   - enabled: 1
     path: Assets/Scenes/Hallway.unity
     guid: 65e8bc2135c6c0a41863e0cf166f32d3
@@ -36,9 +39,24 @@ EditorBuildSettings:
     path: Assets/Scenes/Wally's Room.unity
     guid: 1685522c37b0ec047b97f4a634151ab0
   - enabled: 1
+    path: Assets/Scenes/Killed_Ending.unity
+    guid: 962548fbb80c6f74d886734647eeb559
+  - enabled: 1
     path: Assets/Scenes/Escape Ending.unity
     guid: b9d975655af7c164bb443e8bd956d0a1
   - enabled: 1
     path: Assets/Scenes/Escape_after_discovery_Ending.unity
     guid: f6130bc4879507044bde0c47339a5e57
+  - enabled: 1
+    path: Assets/Scenes/WallyConfront.unity
+    guid: 3916f6ecf6e72f84ca5cbe7882a8c834
+  - enabled: 1
+    path: Assets/Scenes/Wally_death_Ending.unity
+    guid: 79b0a44b542b2344fb22047195123d1a
+  - enabled: 1
+    path: Assets/Scenes/suicide_ending.unity
+    guid: 28e9e8fe1fd8d02408f4fd1abcf84b5f
+  - enabled: 1
+    path: Assets/Scenes/Prison_Ending.unity
+    guid: b16520902c1d3264ebf9ea8c1e32c9ad
   m_configObjects: {}

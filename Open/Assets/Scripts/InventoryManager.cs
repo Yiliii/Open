@@ -74,4 +74,13 @@ public class InventoryManager : MonoBehaviour
             Debug.Log("You harmed yourself.");
         }
     }
+
+    public void ResetInventory()
+    {
+        collectedItems.Clear();
+        collectedItemIDs.Clear();
+        itemInHand = null;
+
+        onInventoryChangedCallback?.Invoke();
+    }
 }
